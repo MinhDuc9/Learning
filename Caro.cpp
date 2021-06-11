@@ -101,20 +101,25 @@ int check (vector<int>a){
     return 0;
 }
 
-int AI_Wining(vector<int>AI, vector<int>player){
-    int random_first_move[4] = {1,3,7,9};
-    srand ( time(NULL) );
+int Ai_sm(vector<int>player){
+	int a = player.at(0);
+	if (a == 2 || a == 3 || a == 6 || a == 9){
+		return 7;
+	}
+	else if (a == 4 || a == 7 || a == 8){
+		return 3;
+	}
+	else{
+		return 9;
+	}
+}
 
-    int RandIndex = rand() % 4; 
-    int first_move = random_first_move[RandIndex];
-    int move;
-    if (AI.empty()){
-        move = first_move;
-    }
-    else{
-        move = 0;
-    }
-    return move;
+int Ai_tm(vector<int>player){
+	int a = player.at(1);
+
+	if (a == 2 || a == 3){
+
+	}
 }
 
 int main(){
@@ -132,7 +137,7 @@ int main(){
         cin >> ordinal;
     }
 
-    system("clear");  
+    system("cls");  
 
     char board_fake [9] ={'1','2','3','4','5','6','7','8','9'}; 
 
@@ -181,24 +186,52 @@ int main(){
             }
         }
     }
+
     else{
         if (ordinal == 1){
             vector<int>AI_move;
             vector<int>player;
             for (int i=0; i<9; i++){
+
                 if (i % 2 == 0){
-                    cout << "May di: " << endl;
-                    int a = AI_Wining(AI_move, player);
-                    char temp = 'X';
-                    board_fake[a-1] = temp;
-                    printscreen(board_fake);
-                    AI_move.push_back(a);
-                    cout << endl;
+					char temp = 'X';
+                    if (i == 0){
+						AI_move.push_back(1);
+						board_fake[0] = temp;
+						cout << "May di: " << 1 << endl;
+						printscreen(board_fake);
+					}
+					
+					else if (i == 2){
+						int a = Ai_sm(player);
+						AI_move.push_back(a);
+						board_fake[a-1] = temp;
+						cout << "May di: " << a << endl;
+						printscreen(board_fake); 
+					}
+
+					else if (i == 4){
+						cout << "May di: ";
+						int a; cin >> a;
+						AI_move.push_back(a);
+						board_fake[a-1] = temp;
+						cout << endl;
+						if (check(AI_move) == 1){
+							cout << "May thang roi!" << endl;
+							printscreen(board_fake);
+							return 0; 
+						}
+						printscreen(board_fake);
+					}
                 }
+
                 else{
-                    cout << "Nguoi choi di: " << endl;
+                    cout << "Nguoi choi di: ";
                     int a; cin >> a;
+					player.push_back(a);
                     char temp = 'O'; 
+					board_fake[a-1] = temp;
+					printscreen(board_fake);
                 }
             }
         }
