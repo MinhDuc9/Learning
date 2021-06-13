@@ -154,7 +154,67 @@ int Ai_tm(vector<int>player){
             return 2;
         }
     }
+
+    else if (a == 8){
+        if (b == 2){
+            return 5;
+        }
+        else{
+            return 2;
+        }
+    }
 }
+
+int Ai_fm(vector<int>player){
+    int a = player.at(0);
+    int c = player.at(2);
+
+    if (a == 2 || a == 3){
+        if (c == 8){
+            return 5;
+        }
+        else{
+            return 8;
+        }
+    }
+
+    if (a == 6){
+        if (c == 3){
+            return 9;
+        }
+        else{
+            return 3;
+        }
+    }
+
+    if (a == 9){
+        if (c == 5){
+            return 2;
+        }
+        else{
+            return 5;
+        }
+    }
+
+    if (a == 4 || a == 7){
+        if (c == 5){
+            return 6;
+        }
+        else{
+            return 5;
+        }
+    }
+
+    if (a == 8){
+        if (c == 7){
+            return 9;
+        }
+        else{
+            return 7;
+        }
+    }
+}
+
 
 int main(){
     cout << "Chao mung cac ban den voi tro choi caro!" << endl;
@@ -255,6 +315,18 @@ int main(){
                             return 0;
                         }
 					}
+
+                    else if (i == 6){
+                        int a = Ai_fm(player);
+                        cout << "May di: " << a << endl;
+                        AI_move.push_back(a);
+                        board_fake[a-1] = temp;
+                        printscreen(board_fake);
+                        if (check(AI_move) == 1){
+                            cout << "May thang!" << endl;
+                            return 0;
+                        }
+                    }
                 }
 
                 else{
