@@ -163,10 +163,37 @@ int Ai_tm(vector<int>player){
             return 2;
         }
     }
+
+    else if (a == 5){
+        //truong hop cheo - chien thang
+        if (b == 7){
+            return 3;
+        }
+        else if (b == 3){
+            return 7;
+        }
+        
+        // doc - tran hoa
+        else if (b == 2){
+            return 8;
+        }
+        else if (b == 8){
+            return 2;
+        }
+        
+        // ngang - tran hoa
+        else if (b == 4){
+            return 6;
+        }
+        else{
+            return 4;
+        }
+    }
 }
 
 int Ai_fm(vector<int>player){
     int a = player.at(0);
+    int b = player.at(1);
     int c = player.at(2);
 
     if (a == 2 || a == 3){
@@ -213,6 +240,21 @@ int Ai_fm(vector<int>player){
             return 7;
         }
     }
+
+    // if (a == 5){
+    //     if (b == 7){
+    //         if (c == 2){
+    //             return 6;
+    //         }
+    //         else{
+    //             return 2;
+    //         }
+    //     }
+
+    //     else if (b == 2){
+    //         return 
+    //     }
+    // }
 }
 
 
@@ -236,6 +278,7 @@ int main(){
     char board_fake [9] ={'1','2','3','4','5','6','7','8','9'}; 
 
     printscreen(board_fake);
+    cout << endl;
 
     if (option == 2){
         vector<int>player1;
@@ -336,6 +379,11 @@ int main(){
                     char temp = 'O'; 
 					board_fake[a-1] = temp;
 					printscreen(board_fake);
+                }
+
+                cout << endl;
+                if (i == 8){
+                    cout << "Tran dau hoa!" << endl;
                 }
             }
         }
