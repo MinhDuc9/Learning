@@ -115,11 +115,45 @@ int Ai_sm(vector<int>player){
 }
 
 int Ai_tm(vector<int>player){
-	int a = player.at(1);
+	int a = player.at(0);
+    int b = player.at(1);
 
 	if (a == 2 || a == 3){
-
+        if (b == 4){
+            return 9;
+        }
+        else{
+            return 4;
+        }
 	}
+
+    else if (a == 6){
+        if (b == 4){
+            return 5;
+        }
+        else{
+            return 4;
+        }
+    }
+
+    else if (a == 9){
+        if (b == 4){
+            return 3;
+        }
+        else{
+            return 4;
+        }
+    }
+
+
+    else if (a == 4 || a == 7){
+        if (b == 2){
+            return 9;
+        }
+        else{
+            return 2;
+        }
+    }
 }
 
 int main(){
@@ -211,17 +245,15 @@ int main(){
 					}
 
 					else if (i == 4){
-						cout << "May di: ";
-						int a; cin >> a;
+                        int a = Ai_tm(player);
+						cout << "May di: " << a << endl;
 						AI_move.push_back(a);
 						board_fake[a-1] = temp;
-						cout << endl;
-						if (check(AI_move) == 1){
-							cout << "May thang roi!" << endl;
-							printscreen(board_fake);
-							return 0; 
-						}
-						printscreen(board_fake);
+                        printscreen(board_fake);
+                        if (check(AI_move) == 1){
+                            cout << "May thang!" << endl;
+                            return 0;
+                        }
 					}
                 }
 
