@@ -314,12 +314,15 @@ int Ai_fivm(vector<int>player, vector<int>Ai){
 }
 
 int Easy_mode(vector<int>move){
-    vector<int>left_back;
-    
+    int random = rand() % move.size();
+    int sel_elem = move[random];
+
+    return sel_elem;
 }
 
 
 int main(){
+    system("cls");
     cout << "Chao mung cac ban den voi tro choi caro!" << endl;
     cout << "Made by: Duc va Thong \n" << endl;
     cout << "Chon o so tu 1->9 trong bang de choi! \n" << endl;
@@ -392,7 +395,7 @@ int main(){
     }
 
     else{
-        vector<int>easy;
+        vector<int>easy = {1,2,3,4,5,6,7,8,9};
         vector<int>AI_move;
         vector<int>player;
         if (ordinal == 1){
@@ -469,19 +472,30 @@ int main(){
                     if (i%2 == 0){
                         cout << "Nguoi choi di: ";
                         int a; cin >> a;
-                        easy.push_back(a);
+                        player.push_back(a);
+                        for (int i=0; i<easy.size(); i++){
+                            if (a == easy.at(i)){
+                                easy.erase(easy.begin() + i);
+                            }
+                        }
                         char temp = 'X';
                         board_fake[a-1] = temp;
                         printscreen(board_fake);
                         if (check(player) == 1){
-                            cout "Ban da thang!" << endl;
+                            cout << "Ban da thang!" << endl;
                             return 0;
                         }
                     }
+
                     else{
                         int a = Easy_mode(easy);
                         cout << "May di: " << a << endl;
-                        easy.push_back(a);
+                        AI_move.push_back(a);
+                        for (int i=0; i<easy.size(); i++){
+                            if (a == easy.at(i)){
+                                easy.erase(easy.begin() + i);
+                            }
+                        }
                         char temp = 'O';
                         board_fake[a-1] = temp;
                         printscreen(board_fake);
@@ -493,11 +507,34 @@ int main(){
                 }
 
                 else if (fsc == 2){
-                    if (i%2 == 0){
+                    if (i%2 != 0){
+                        cout << "Nguoi choi di: ";
+                        int a; cin >> a;
+                        player.push_back(a);
+                        for (int i=0; i<easy.size(); i++){
+                            if (a == easy.at(i)){
+                                easy.erase(easy.begin() + i);
+                            }
+                        }
+                        char temp = 'X';
+                        board_fake[a-1] = temp;
+                        printscreen(board_fake);
+                        if (check(player) == 1){
+                            cout << "Ban da thang!" << endl;
+                            return 0;
+                        }
+                    }
+
+                    else{
                         int a = Easy_mode(easy);
                         cout << "May di: " << a << endl;
-                        easy.push_back(a);
-                        char temp = 'X';
+                        AI_move.push_back(a);
+                        for (int i=0; i<easy.size(); i++){
+                            if (a == easy.at(i)){
+                                easy.erase(easy.begin() + i);
+                            }
+                        }
+                        char temp = 'O';
                         board_fake[a-1] = temp;
                         printscreen(board_fake);
                         if (check(AI_move) == 1){
@@ -505,21 +542,13 @@ int main(){
                             return 0;
                         }
                     }
-                    else{
-                        cout << "Nguoi choi di: ";
-                        int a; cin >> a;
-                        easy.push_back(a);
-                        char temp = 'O';
-                        board_fake[a-1] = temp;
-                        printscreen(board_fake);
-                        if (check(player) == 1){
-                            cout "Ban da thang!" << endl;
-                            return 0;
-                        }
-                    }
                 }
 
                 cout << endl;
+                if (i == 8){
+                    cout << "Tran dau hoa!" << endl;
+                    return 0;
+                }
             }
         }
     }
