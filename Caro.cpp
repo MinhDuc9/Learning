@@ -241,20 +241,81 @@ int Ai_fm(vector<int>player){
         }
     }
 
-    // if (a == 5){
-    //     if (b == 7){
-    //         if (c == 2){
-    //             return 6;
-    //         }
-    //         else{
-    //             return 2;
-    //         }
-    //     }
+    if (a == 5){
+        if (b == 7){
+            if (c == 2){
+                return 6;
+            }
+            else{
+                return 2;
+            }
+        }
 
-    //     else if (b == 2){
-    //         return 
-    //     }
-    // }
+        else if (b == 2){
+            if (c == 7){
+                return 3; 
+            }
+            else{
+                return 7;
+            }
+        }
+
+        else if (b == 3){
+            if (c == 2){
+                return 6;
+            }
+            else{
+                return 2;
+            }
+        }
+
+        else if (b == 8){
+            if (c == 3){
+                return 7;
+            }
+            else{
+                return 3;
+            }
+        }
+
+        else if (b == 4){
+            if (c == 3){
+                return 7;
+            }
+            else{
+                return 3;
+            }
+        }
+
+        else{
+            if (c == 7){
+                return 3;
+            }
+            else{
+                return 7;
+            }
+        }
+    }
+}
+
+int Ai_fivm(vector<int>player, vector<int>Ai){
+    int total1 = 0;
+    int total2 = 0;
+    for (int i=0; i<player.size(); i++){
+        total1 += player.at(i);
+    }
+    for (int i=0; i<Ai.size(); i++){
+        total2 += Ai.at(i);
+    }
+
+    int final = 45 - total1 - total2;
+
+    return final;
+}
+
+int Easy_mode(vector<int>move){
+    vector<int>left_back;
+    
 }
 
 
@@ -266,11 +327,17 @@ int main(){
     cout << "Chon che do choi (1 - Single play || 2 - Multiplay) \n" << endl;
 
     int option; cin >> option;
-    int ordinal;
+    int ordinal, fsc;
 
     if (option == 1){
-        cout << "Di sau an phim 1 (di truoc an phim 2): " << endl;
+        cout << "Chon che do an phim (1.Hard - 2.Easy):  " << endl;
         cin >> ordinal;
+        if (ordinal == 2){
+            cout << endl;
+            cout << "Ban muon di truoc hay di sau?" << endl;
+            cout << "Bam phim 1 de di truoc, 2 de di sau: " << endl;
+            cin >> fsc;
+        }
     }
 
     system("cls");  
@@ -325,9 +392,10 @@ int main(){
     }
 
     else{
+        vector<int>easy;
+        vector<int>AI_move;
+        vector<int>player;
         if (ordinal == 1){
-            vector<int>AI_move;
-            vector<int>player;
             for (int i=0; i<9; i++){
 
                 if (i % 2 == 0){
@@ -370,6 +438,16 @@ int main(){
                             return 0;
                         }
                     }
+
+                    else{
+                        int a = Ai_fivm(player, AI_move);
+                        cout << "May di: " << a << endl;
+                        AI_move.push_back(a);
+                        board_fake[a-1] = temp;
+                        printscreen(board_fake);
+                        cout << "Tran dau hoa!" << endl;
+                        return 0;
+                    }
                 }
 
                 else{
@@ -382,9 +460,66 @@ int main(){
                 }
 
                 cout << endl;
-                if (i == 8){
-                    cout << "Tran dau hoa!" << endl;
+            }
+        }
+
+        else{
+            for (int i=0; i<9; i++){
+                if (fsc == 1){
+                    if (i%2 == 0){
+                        cout << "Nguoi choi di: ";
+                        int a; cin >> a;
+                        easy.push_back(a);
+                        char temp = 'X';
+                        board_fake[a-1] = temp;
+                        printscreen(board_fake);
+                        if (check(player) == 1){
+                            cout "Ban da thang!" << endl;
+                            return 0;
+                        }
+                    }
+                    else{
+                        int a = Easy_mode(easy);
+                        cout << "May di: " << a << endl;
+                        easy.push_back(a);
+                        char temp = 'O';
+                        board_fake[a-1] = temp;
+                        printscreen(board_fake);
+                        if (check(AI_move) == 1){
+                            cout << "May thang!" << endl;
+                            return 0;
+                        }
+                    }
                 }
+
+                else if (fsc == 2){
+                    if (i%2 == 0){
+                        int a = Easy_mode(easy);
+                        cout << "May di: " << a << endl;
+                        easy.push_back(a);
+                        char temp = 'X';
+                        board_fake[a-1] = temp;
+                        printscreen(board_fake);
+                        if (check(AI_move) == 1){
+                            cout << "May thang!" << endl;
+                            return 0;
+                        }
+                    }
+                    else{
+                        cout << "Nguoi choi di: ";
+                        int a; cin >> a;
+                        easy.push_back(a);
+                        char temp = 'O';
+                        board_fake[a-1] = temp;
+                        printscreen(board_fake);
+                        if (check(player) == 1){
+                            cout "Ban da thang!" << endl;
+                            return 0;
+                        }
+                    }
+                }
+
+                cout << endl;
             }
         }
     }
