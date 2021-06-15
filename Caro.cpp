@@ -8,7 +8,7 @@ using namespace std;
 void printscreen(char board[]){
     for (int i=0; i<9; i+=3)
     {
-        cout << board[i]<< " " << board[i+1] << " " << board[i+2] << endl;
+        cout << board[i] << " " << board[i+1] << " " << board[i+2] << endl;
     }
 }
 
@@ -264,8 +264,14 @@ int Ai_fm(vector<int>player){
             if (c == 2){
                 return 6;
             }
-            else{
+            else if (c == 6){
                 return 2;
+            }
+            else if (c == 4){
+                return 8;
+            }
+            else{
+                return 4;
             }
         }
 
